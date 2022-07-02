@@ -27,10 +27,6 @@ public class Customer {
 	private float lattitude;
 	private float longitude;
 	
-	@OneToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE},orphanRemoval = true)
-	@JoinColumn(name="cart_id")
-	private Cart customerCart;
-	
 	public Customer(String email, String password, String address, float lattitude, float longitude) {
 		super();
 		this.email = email;
@@ -44,13 +40,6 @@ public class Customer {
 		super();
 	}
 
-	public Cart getCustomerCart() {
-		return customerCart;
-	}
-
-	public void setCustomerCart(Cart customerCart) {
-		this.customerCart = customerCart;
-	}
 
 	public Long getCustomerId() {
 		return customerid;

@@ -1,46 +1,43 @@
 package com.app.onlinedelivery.models;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
+import org.hibernate.annotations.ManyToAny;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name="cart")
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 public class Cart {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long cartid;
-	
-	@OneToMany
-	private Set<Items> cartItems;
-	
-	public Cart() {
-		// TODO Auto-generated constructor stub
-	}
 
-	public Long getCartid() {
-		return cartid;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long cartId;
 
-	public void setCartid(Long cartid) {
-		this.cartid = cartid;
-	}
-	
+    private String userEmail;
+    private long storeId;
+    private long itemID;
+    private int quantity;
+
+    public Cart(String userEmail, long storeId, long itemID, int quantity) {
+        super();
+        this.userEmail = userEmail;
+        this.storeId = storeId;
+        this.itemID = itemID;
+        this.quantity = quantity;
+    }
 }

@@ -14,6 +14,7 @@ import com.app.onlinedelivery.models.Cart;
 import com.app.onlinedelivery.models.Customer;
 import com.app.onlinedelivery.models.Items;
 import com.app.onlinedelivery.models.Stores;
+import com.app.onlinedelivery.repositories.CartRepository;
 import com.app.onlinedelivery.repositories.CustomerRepository;
 import com.app.onlinedelivery.repositories.ItemRepository;
 import com.app.onlinedelivery.repositories.StoreRepository;
@@ -30,6 +31,10 @@ public class OnlinedeliveryApplication implements CommandLineRunner{
 	@Autowired
 	private ItemRepository itemRepository;
 	
+	@Autowired
+	private CartRepository cartRepository;
+	
+	
 	public static void main(String[] args) {
 		SpringApplication.run(OnlinedeliveryApplication.class, args);
 	}
@@ -38,25 +43,24 @@ public class OnlinedeliveryApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Customer customer = new Customer("sahilnarula98@gmail.com", "pwd", "adawd", 1.2f, 342.0f);
-		Cart cart = new Cart();
-		Items item1 = new Items("elaichi", 20, 1, 3, 18, 100, false);
-		Items item2 = new Items("haldi", 22, 1, 3, 20, 100, false);
-		Set<Items> itemList = new HashSet<Items>();
-		itemList.add(item1);
-		itemList.add(item2);
-		
-		Stores store1 = new Stores("Big Basket", "pipliyahana", "452001", 123.0f, 123.3f);
-		store1.setItemList(itemList);
-		itemRepository.save(item1);
-		itemRepository.save(item2);
-		storeRepository.save(store1);
-		
-		cart.setCartItems(itemList);
-		
-		
-		customer.setCustomerCart(cart);
-		customerRepository.save(customer);
+		Stores s = new Stores("sshop", "red", "adsadd111", 111f, 222f);
+        System.out.println("store id "+ s.getStoreid());
+
+        Items i = new Items("haldi",1000,1,5,10,250,false);
+        i = itemRepository.save(i);
+        System.out.println("item id "+i.getItemid());
+        Set<Items> itemSet = new HashSet<Items>();
+        itemSet.add(i);
+        s.setItemList(itemSet);
+        s = storeRepository.save(s);
+        Customer u = new Customer();
+        u.setAddress("sadwadaw");
+        u.setEmail("dummyuser@email");
+        u.setPassword("password");
+        u = customerRepository.save(u);
+
+        System.out.println("user id "+ u.getCustomerId());
+        System.out.println("user email "+ u.getEmail());
 	}
 
 }

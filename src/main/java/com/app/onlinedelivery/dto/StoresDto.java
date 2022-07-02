@@ -8,6 +8,7 @@ public class StoresDto {
 	public static class GetStoresBySearch{
 		private String name;
 		private Long storeId;
+		private String area;
 	}
 
 }
